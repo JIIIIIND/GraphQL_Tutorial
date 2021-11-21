@@ -37,7 +37,7 @@ const resolvers = {
 		feed: () => linkValues,
 	},
 	Mutation: {
-		addLink: (parent, args) => {
+		addLink: (parent, args, context) => {
 			if (!args.id || !args.url || !args.desc) {
 				return null
 			}
@@ -46,7 +46,7 @@ const resolvers = {
 				url: args.url,
 				description: args.desc,
 			}
-			linkValues.push(item);
+			context.linkValues.push(item);
 			return item
 		},
 	},
@@ -60,10 +60,17 @@ const resolvers = {
    스키마와 리졸버를 ApolloServer에 전달
    스키마와 리졸버 외에도 지정할 수 있는 값 있음
    gql에선 요청에 대한 반환 타입을 정의하는 스키마와 해당 내용을 어떻게 찾는지 정의하는 리졸버가 핵심
+   
+   이전 코드에서는 linkValues를 글로벌로 선언하여 리졸버에서 접근하지만, 리졸버가 커짐에 따라 파일로 나누면 문제가 발생함
+   gql서버에서는 해당 문제를 해결하기 위해 context를 제공
+   추가한 context는 리졸버의 파라미터로 접근 가능
  */
 const server = new ApolloServer({
 	typeDefs,
 	resolvers,
+	context: {
+		linkValues: linkValues
+	},
 })
 
 server
