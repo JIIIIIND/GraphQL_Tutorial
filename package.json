@@ -1,0 +1,24 @@
+{
+  "name": "GraphQL_Tutorial",
+  "version": "1.0.0",
+  "description": "jandy14-GraphQL 튜토리얼 실습 프로젝트",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JIIIIIND/GraphQL_Tutorial.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JIIIIIND/GraphQL_Tutorial/issues"
+  },
+  "homepage": "https://github.com/JIIIIIND/GraphQL_Tutorial#readme",
+  "dependencies": {
+    "apollo-server": "^2.25.3",
+    "graphql": "^16.0.1"
+  }
+}
