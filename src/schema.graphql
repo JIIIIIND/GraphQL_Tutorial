@@ -11,3 +11,7 @@ type Link {
 	shortDescription: String
 }
 
+type Mutation {
+	addLink(id: ID, url: String, desc: String) : Link
+}
+

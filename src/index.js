@@ -36,6 +36,20 @@ const resolvers = {
 		info: () => `this is info api`,
 		feed: () => linkValues,
 	},
+	Mutation: {
+		addLink: (parent, args) => {
+			if (!args.id || !args.url || !args.desc) {
+				return null
+			}
+			const item = {
+				id: args.id,
+				url: args.url,
+				description: args.desc,
+			}
+			linkValues.push(item);
+			return item
+		},
+	},
 	Link: {
 		urlLength: (parent) => parent.url.length,
 		shortDescription: (parent) => parent.description.substring(0, 5),
