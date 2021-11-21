@@ -19,6 +19,8 @@
   "homepage": "https://github.com/JIIIIIND/GraphQL_Tutorial#readme",
   "dependencies": {
     "apollo-server": "^3.5.0",
-    "graphql": "^16.0.1"
+    "fs": "0.0.1-security",
+    "graphql": "^16.0.1",
+    "path": "^0.12.7"
   }
 }

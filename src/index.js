@@ -1,23 +1,37 @@
 const { ApolloServer } = require('apollo-server');
+const fs = require('fs');
+const path = require('path');
 
 /*
    gql 서버에 요청할 수 있는 스키마에 대한 정의
-   String 뒤의 !는 Non-Nullable을 의미함
  */
-const typeDefs = `
-	type Query {
-		info: String!
-	}
-`
+const typeDefs = fs.readFileSync(
+	path.join(__dirname, './schema.graphql'),
+	'utf8'
+)
+
+let linkValue = {
+	id: 'link-0',
+	url: 'www.howtographql.com',
+	description: 'Fullstack tutorial for GraphQL'
+}
+
 /*
    typeDefs에 정의한 내용을 어떻게 찾는지 알려줌
    ex) 위의 info는 String!를 가지는데, resolvers에서 'this is info api'라는 값이라고 정의함
    info를 요청하면 해당 함수를 호출해 반환해줌
+
+   단순히 parent에서 동명의 필드 값을 반환하는 리졸버는 생략이 가능함(id, url, description)i
  */
 const resolvers = {
 	Query: {
-		info: () => `this is info api`
-	}
+		info: () => `this is info api`,
+		feed: () => linkValue,
+	},
+	Link: {
+		urlLength: (parent) => parent.url.length,
+		shortDescription: (parent) => parent.description.substring(0, 5),
+	},
 }
 
 /*
