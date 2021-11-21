@@ -10,11 +10,19 @@ const typeDefs = fs.readFileSync(
 	'utf8'
 )
 
-let linkValue = {
+/*
+   타입에 대괄호를 씌워서 리스트 타입임을 나타냄
+   ! 표시는 두군데 할 수 있으며, 위치에 따라 의미가 다름
+   [Link]	리스트, 요소 Nullable
+   [Link!]	리스트 Nullable, 요소 Non-Nullable
+   [Link]!	리스트 Non-Nullable, 요소 Nullable
+   [Link!]!	리스트, 요소 Non-Nullable
+ */
+let linkValues = [{
 	id: 'link-0',
 	url: 'www.howtographql.com',
 	description: 'Fullstack tutorial for GraphQL'
-}
+}]
 
 /*
    typeDefs에 정의한 내용을 어떻게 찾는지 알려줌
@@ -26,7 +34,7 @@ let linkValue = {
 const resolvers = {
 	Query: {
 		info: () => `this is info api`,
-		feed: () => linkValue,
+		feed: () => linkValues,
 	},
 	Link: {
 		urlLength: (parent) => parent.url.length,
